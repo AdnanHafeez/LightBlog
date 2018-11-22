@@ -65,7 +65,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({ filename: 'style.css' }),
     new HtmlWebpackPlugin({
-      template: './resources/index.html',
+      template: 'D:/Programming Projects/LightBlog/client/resources/index.html',
       filename: './index.html',
       hash: true,
     }),
