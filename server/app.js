@@ -21,14 +21,14 @@ app.use(session({secret:'LightBlog', cookie:{maxAge: 60000}, resave:false, saveU
 if(!isProduction) {
   app.use(errorHandler());
 }
-
+require('./models/Articles');
 mongoose.connect('mongodb://localhost/lightblog');
 mongoose.set('debug',true);
 
 app.use(require('./routes'));
 
 //Add models
-require('./models/Articles');
+
 
 // Add routes
 

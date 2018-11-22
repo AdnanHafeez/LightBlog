@@ -40,7 +40,8 @@ class Home extends React.Component {
       <div className="container">
         <div className="row pt-5">
           <div className="col-12 col-lg-6 offset-lg-3">
-            <h1 className="text-center">LightBlog</h1>
+            <h1 className="text-center">Welcome to Adnan's Blog</h1>
+            <h3 className="text-center">Created this blog to learn React</h3>
           </div>
           <Form />
         </div>
