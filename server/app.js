@@ -18,9 +18,45 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname,'public')));
 app.use(session({secret:'LightBlog', cookie:{maxAge: 60000}, resave:false, saveUninitialized:false}));
 
-(if(!isProduction)) {
+if(!isProduction) {
   app.use(errorHandler());
 }
 
 mongoose.connect('mongodb://localhost/lightblog');
 mongoose.set('debug',true);
+
+app.use(require('./routes'));
+
+//Add models
+require('./models/Articles');
+
+// Add routes
+
+app.use((req,res,next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+if(!isProduction) {
+  app.use((err,req,res) => {
+     res.status(err.status || 500);
+     res.json({
+       errors: {
+         message: err.message,
+         error: err,
+       },
+     });
+  });
+}
+app.use((err,req,res) => {
+  res.status(error.status || 500);
+  res.json({
+    errors: {
+      message: err.message,
+      error: {},
+    },
+  });
+});
+
+const server = app.listen(8000, () => console.log("Server started on 8000!"));
